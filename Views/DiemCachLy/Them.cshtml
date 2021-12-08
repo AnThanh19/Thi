@@ -1,0 +1,12 @@
+﻿
+@{
+    ViewData["Title"] = "DiemCachLy";
+}
+
+<h1>Thêm điểm cách ly</h1>
+<form action="/DiemCachLy/Create" method="post">
+    <label for="maDiemCachLy">Mã điểm cách ly:</label><input type="text" name="MaDiemCachLy" id="maDiemCachLy" /><br>
+    <label for="tenDiemCachLy">Tên điểm cách ly:</label> <input type="text" name="TenDiemCachLy" id="tenDiemCachLy" /><br>
+    <label for="diaChi">Địa chỉ:</label> <input type="text" name="DiaChi" id="diaChi" /><br>
+    <input type="submit" name="submit" value="Thêm" />
+</form>
