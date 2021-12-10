@@ -1,0 +1,19 @@
+﻿@model List<Thi.Models.DiemCachLyModel>
+@{
+    ViewData["Title"] = "Show";
+}
+
+<h1>Điểm cách ly</h1>
+
+<form action="/DiemCachLy/LietKe" method="post">
+    <label>Tên điểm cách ly: </label>
+        <select name="MaDiemCachLy" id="MaDiemCachLy">
+            @foreach (var item in Model)
+            {
+                <option value="@item.MaDiemCachLy">@item.TenDiemCachLy </option>
+
+            }
+        </select>
+    <br>
+    <input type="submit" name="submit" id="Liet ke" value="Liệt Kê"/>
+</form>

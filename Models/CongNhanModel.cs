@@ -29,9 +29,9 @@ namespace Thi.Models
 
         public string MaCongNhan { get => maCongNhan; set => maCongNhan = value; }
         public string TenCongNhan { get => tenCongNhan; set => tenCongNhan = value; }
+        public int GioiTinh { get => gioiTinh; set => gioiTinh = value; }
         public int NamSinh { get => namSinh; set => namSinh = value; }
         public string NuocVe { get => nuocVe; set => nuocVe = value; }
-        public int GioiTinh { get => gioiTinh; set => gioiTinh = value; }
         public string MaDiemCachLy { get => maDiemCachLy; set => maDiemCachLy = value; }
     }
 }

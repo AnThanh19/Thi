@@ -25,5 +25,35 @@ namespace Thi.Controllers
             }
             return "Thất bại";
         }
+
+        public IActionResult Show()
+        {
+            DbContext context = HttpContext.RequestServices.GetService(typeof(Thi.Models.DbContext)) as DbContext;
+            return View(context.getDiemCachLy());
+        }
+
+        [HttpPost]
+        public IActionResult LietKe(string madiemcachly)
+        {
+            DbContext context = HttpContext.RequestServices.GetService(typeof(Thi.Models.DbContext)) as DbContext;
+            return View(context.getCNCL(madiemcachly));
+        }
+        public IActionResult Delete(string macongnhan, CongNhanModel cn)
+        {
+            DbContext context = HttpContext.RequestServices.GetService(typeof(Thi.Models.DbContext)) as DbContext;
+            if (context.DeleteCN(macongnhan, cn) != 0)
+            {
+                return Redirect("/DiemCachly/Show");
+            }
+            return Redirect("/DiemCachly/Show");
+        }
+       
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult ViewCN(string macongnhan)
+        {
+            DbContext context = HttpContext.RequestServices.GetService(typeof(Thi.Models.DbContext)) as DbContext;
+            return View(context.DetailCN(macongnhan));
+        }
     }
 }

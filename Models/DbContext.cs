@@ -41,6 +41,8 @@ namespace Thi.Models
             }
             return count;
         }
+
+        // Liet ke 
         public List<object> Show(int soTrieuChung)
         {
             List<object> list = new List<object>();
@@ -69,6 +71,129 @@ namespace Thi.Models
             return list;
             }
 
-            
-        }
+
+            // Liet ke diem cach ly
+            public List<DiemCachLyModel> getDiemCachLy()
+            {
+                List<DiemCachLyModel> list = new List<DiemCachLyModel>();
+                using (SqlConnection conn = GetConnection())
+                {
+                    conn.Open();
+                    var query = "select maDiemCachly, tenDiemCachLy from diemcachly";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            list.Add(new DiemCachLyModel()
+                            {
+                                MaDiemCachLy = reader["madiemcachly"].ToString(),
+                                TenDiemCachLy = reader["tendiemcachly"].ToString()
+                            });
+
+                        }
+                    }
+                }
+                return list;
+            }
+            //lay cong nhan theo diem cach ly
+            public List<CongNhanModel> getCNCL(string maDiemCachLy)
+            {
+                List<CongNhanModel> list = new List<CongNhanModel>();
+                using (SqlConnection conn = GetConnection())
+                {
+                    conn.Open();
+                    var query = "select maCongNhan, tenCongNhan, maDiemCachLy from congnhan " +
+                                "where maDiemCachLy=@madiemcachly";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@madiemcachly", maDiemCachLy);
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            list.Add(new CongNhanModel()
+                            {
+                                MaCongNhan = reader["macongnhan"].ToString(),
+                                TenCongNhan = reader["tencongnhan"].ToString()
+                            });
+                        }
+                    }
+                }
+                return list;
+            }
+
+            public List<CongNhanModel> getCN(string maDiemCachLy)
+            {
+                List<CongNhanModel> list = new List<CongNhanModel>();
+                using (SqlConnection conn = GetConnection())
+                {
+                    conn.Open();
+                    var query = "select maCongNhan, tenCongNhan, gioiTinh, namSinh, nuocVe from congnhan " +
+                                "where maDiemCachLy=@madiemcachly";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+
+                    cmd.Parameters.AddWithValue("@madiemcachly", maDiemCachLy);
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            list.Add(new CongNhanModel()
+                            {
+                                MaCongNhan = reader["macongnhan"].ToString(),
+                                TenCongNhan = reader["tencongnhan"].ToString(),
+                                GioiTinh = Convert.ToInt32(reader["gioitinh"].ToString()),
+                                NamSinh = Convert.ToInt32(reader["namsinh"].ToString()),
+                                NuocVe = reader["nuocve"].ToString()
+                            });
+
+
+                        }
+                    }
+                }
+                return list;
+            }
+            public int DeleteCN(string MaCongNhan, CongNhanModel cn)
+            {
+                int count = 0;
+                using (SqlConnection conn = GetConnection())
+                {
+                    conn.Open();
+                    var query = "delete from congnhan where macongnhan = @macongnhan";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@macongnhan", cn.MaCongNhan);
+                    cmd.ExecuteNonQuery();
+                    count++;
+                }
+                return count;
+            }
+
+            public CongNhanModel DetailCN(string macongnhan)
+            {
+                CongNhanModel cn = new CongNhanModel();
+                using (SqlConnection conn = GetConnection())
+                {
+                    conn.Open();
+                    var query = "select * from congnhan where maCongNhan=@macongnhan";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@macongnhan", macongnhan);
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            cn.MaCongNhan = reader["macongnhan"].ToString();
+                            cn.TenCongNhan = reader["tencongnhan"].ToString();
+                            cn.GioiTinh = Convert.ToInt32(reader["gioitinh"].ToString());
+                            cn.NamSinh = Convert.ToInt32(reader["namsinh"].ToString());
+                            cn.NuocVe = reader["nuocve"].ToString();
+                            cn.MaDiemCachLy = reader["madiemcachly"].ToString();
+                        }
+                        reader.Close();
+                    }
+                    conn.Close();
+                }
+                return cn;
+            }
+
+    }
 }

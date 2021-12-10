@@ -1,0 +1,39 @@
+﻿@model Thi.Models.CongNhanModel
+
+
+@{
+    ViewData["Title"] = "View";
+
+}
+<form >
+    <div class="form-group">
+        <label>Mã Công Nhân</label>
+        <input disabled class="from-control" value="@Model.MaCongNhan"/>
+    </div>
+    <div class="form-group">
+        <label>Tên Công nhân</label>
+        <input disabled type="text" class="from-control" value=" @Model.TenCongNhan"/>
+    </div>
+    <div class="form-group">
+        <label>Giới Tính</label>
+        @if (Model.GioiTinh == 1)
+        {
+            <input disabled checked type="checkbox"/>
+        }
+        else
+        {
+            <input disabled type="checkbox" />
+        }
+    </div>
+    <div class="form-group">
+        <label>Năm Sinh</label>
+        <input disabled type="date" class="from-control" value="@Model.NamSinh"/>
+    </div>
+    <div class="form-group">
+        <label>Nước về</label>
+        <input disabled type="text" class="from-control" value="@Model.NuocVe"/>
+    </div>
+</form>
+<div>
+    <a asp-action="LietKe">Back to List</a>
+</div>
