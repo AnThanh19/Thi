@@ -42,38 +42,6 @@ namespace Thi.Models
             return count;
         }
 
-        // Liet ke can ho
-
-        //public List<NhanVienModel> getNhanVien(int soLan)
-        //{
-        //    List<NhanVienModel> list = new List<NhanVienModel>();
-        //    using (MySqlConnection conn = GetConnection())
-        //    {
-        //        conn.Open();
-        //        string query = "select nv.manv, tennv, sum(a.lanthu) as solan" +
-        //                       " from nhanvien nv,  (select manv, matb, mach, max(lanthu) as lanthu from nv_bt group by manv, matb, mach) a" +
-        //                       " where nv.manv=a.manv" +
-        //                       "  group by nv.manv, tennv" +
-        //                       " having sum(a.lanthu) >= @solan";
-        //        MySqlCommand cmd = new MySqlCommand(query, conn);
-        //        cmd.Parameters.AddWithValue("@solan", soLan);
-        //        using (var reader = cmd.ExecuteReader())
-        //        {
-        //            while (reader.Read())
-        //            {
-        //                list.Add(new NhanVienModel()
-        //                {
-        //                    MaNV = reader["manv"].ToString(),
-        //                    TenNV = reader["tennv"].ToString(),
-        //                    SoLan = Convert.ToInt32(reader["solan"].ToString()),
-        //                });
-
-        //            }
-        //        }
-        //    }
-        //    return list;
-        //}
-
         // Liet ke ten nhan vien
         public List<object> Show(int soTrieuChung)
         {
