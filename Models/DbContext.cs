@@ -41,8 +41,6 @@ namespace Thi.Models
             }
             return count;
         }
-
-        // Liet ke ten nhan vien
         public List<object> Show(int soTrieuChung)
         {
             List<object> list = new List<object>();
